@@ -1,0 +1,25 @@
+type Recipe {
+  id: ID!
+  title: String!
+  ingredients: [String!]!
+  instructions: String!
+}
+
+type ImageGallery {
+  id: ID!
+  name: String!
+  images: [String!]!
+}
+
+type Query {
+  recipe(id: ID!): Recipe
+  allRecipes: [Recipe!]!
+  imageGallery(id: ID!): ImageGallery
+  allImageGalleries: [ImageGallery!]!
+}
+
+type Mutation {
+  createRecipe(title: String!, ingredients: [String!]!, instructions: String!): Recipe
+  createImageGallery(name: String!, images: [String!]!): ImageGallery
+  # Add more mutations as per your requirements
+}
