@@ -1,0 +1,61 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background: #f5f5dc;
+  color: #333;
+}
+
+.quote_container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #666;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+#todo-input {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 0.5em;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
