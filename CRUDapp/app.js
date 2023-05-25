@@ -1,18 +1,23 @@
-const todoForm = document.getElementById('todo-form');
-const todoInput = document.getElementById('todo-input');
-const todoList = document.getElementById('todo-list');
+// Data Form
+const todoForm = document.getElementById('todo_form');
+const todoTitle = document.getElementById('todo_title');
+const todoContent = document.getElementById('todo_content');
+const todoList = document.getElementById('todo_list');
 
 todoForm.addEventListener('submit', addTodo);
 todoList.addEventListener('click', handleTodoClick);
 
 function addTodo(e) {
   e.preventDefault();
-  const content = todoInput.value;
-  todoInput.value = '';
+  const title = todoTitle.value;
+  todoTitle.value = '';
+  const content = todoContent.value;
+  todoContent.value = '';
   const query = `
     mutation {
-      addTodo(content: "${content}") {
+      addTodo(title: "${title}", content: "${content}") {
         id
+        title
         content
       }
     }
@@ -34,12 +39,14 @@ function handleTodoClick(e) {
       `;
       graphqlRequest(query, updateTodoList);
     } else if (buttonType === 'edit') {
+      const newTitle = prompt('Enter new title for the todo item');
       const newContent = prompt('Enter new content for the todo item');
       if (newContent) {
         const query = `
           mutation {
-            editTodo(id: ${todoId}, content: "${newContent}") {
+            editTodo(id: ${todoId}, title: "${newTitle}", content: "${newContent}") {
               id
+              title
               content
             }
           }
@@ -55,6 +62,7 @@ function updateTodoList() {
     query {
       todos {
         id
+        title
         content
       }
     }
@@ -64,10 +72,15 @@ function updateTodoList() {
 
 function displayTodos(data) {
   todoList.innerHTML = data.todos.map(todo => `
-    <li>
-      ${todo.content}
-      <button data-button-type="delete" data-todo-id="${todo.id}">Delete</button>
-      <button data-button-type="edit" data-todo-id="${todo.id}">Edit</button>
+    <li class="todo_list_data">
+      <div class="todo_data">
+        <b>${todo.title}</b><br><br>
+        ${todo.content}
+      </div>
+      <div class="todo_btns">
+        <button data-button-type="delete" data-todo-id="${todo.id}">Delete</button>
+        <button data-button-type="edit" data-todo-id="${todo.id}">Edit</button>
+      </div>
     </li>
   `).join('');
 }
@@ -85,18 +98,24 @@ function graphqlRequest(query, callback) {
 
 updateTodoList();
 
-const quoteDisplay = document.getElementById('quote-display');
+
+// Quote API
+const quoteDisplay = document.getElementById('quote_display');
+const quoteAuthor = document.getElementById('quote_author');
 
 async function updateQuote() {
   try {
     const response = await fetch('https://api.quotable.io/random');
     const data = await response.json();
 
-    quoteDisplay.textContent = `${data.content} - ${data.author}`;
+    quoteDisplay.textContent = `${data.content}`;
+    quoteAuthor.textContent = `-${data.author}`;
 
     // Remove the 'quote-visible' class and add it back after a short delay to restart the CSS transition
-    quoteDisplay.classList.remove('quote-visible');
-    setTimeout(() => quoteDisplay.classList.add('quote-visible'), 50);
+    quoteDisplay.classList.remove('quote_visible');
+    quoteAuthor.classList.remove('quote_visible');
+    setTimeout(() => quoteDisplay.classList.add('quote_visible'), 50);
+    setTimeout(() => quoteAuthor.classList.add('quote_visible'), 50);
   } catch (err) {
     console.error('Failed to fetch quote:', err);
   }

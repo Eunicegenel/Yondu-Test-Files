@@ -1,12 +1,12 @@
-let todos = [{ id: 1, content: "First Todo" }];
+let todos = [{ id: 1, title:"Test", content: "First Todo" }];
 
 export const resolvers = {
   Query: {
     todos: () => todos,
   },
   Mutation: {
-    addTodo: (_: any, { content }: { content: string }) => {
-      const newTodo = { id: todos.length + 1, content };
+    addTodo: (_: any, { title, content }: { title: string, content: string }) => {
+      const newTodo = { id: todos.length + 1, title, content };
       todos.push(newTodo);
       return newTodo;
     },
@@ -15,11 +15,11 @@ export const resolvers = {
       todos = todos.filter((todo) => todo.id !== id);
       return todoToDelete;
     },
-    editTodo: (_: any, { id, content }: { id: number; content: string }) => {
+    editTodo: (_: any, { id, title, content }: { id: number; title: string, content: string }) => {
       let updatedTodo;
       todos = todos.map((todo) => {
         if (todo.id === id) {
-          updatedTodo = { ...todo, content: content };
+          updatedTodo = { ...todo, title: title, content: content };
           return updatedTodo;
         }
         return todo;

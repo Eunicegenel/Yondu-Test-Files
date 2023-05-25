@@ -9,17 +9,35 @@
 </head>
 
 <body>
-  <div class="quote_container">
-    <p id="quote-display" class="quote"></p>
+  <div class="section_layout">
+    <div class="container_wrapper">
+      <div class="data_container">
+        <div class="form_container">
+          <h1>Create Todo</h1>
+          <form id="todo_form">
+            <input type="text" id="todo_title" placeholder="Title">
+            <textarea  type="text" id="todo_content" rows="10" placeholder="Add your thoughts..."></textarea>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+        <div class="quote_container">
+          <p id="quote_display" class="quote"></p><br>
+          <p id="quote_author" class="quote"></p>
+        </div>
+      </div>
+    
+      <div class="todo_wrapper">
+        <h1>Todo List</h1>
+        <div class="todo_container">
+          <ul id="todo_list"></ul>
+        </div>
+      </div>
+      
+    </div>
   </div>
-  <div class="container">
-    <h1>Coffee Shop Diary</h1>
-    <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Add your thoughts...">
-      <button type="submit">Add</button>
-    </form>
-    <ul id="todo-list"></ul>
-  </div>
+
+  <img loading="lazy" class="coffeshop" src="./assets/coffeeshop.png">
+  
   <script src="app.js"></script>
 </body>
 

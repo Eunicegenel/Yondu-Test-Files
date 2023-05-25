@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   type Todo {
     id: Int!
+    title: String!
     content: String!
   }
 
@@ -11,8 +12,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    addTodo(content: String!): Todo!
+    addTodo(title: String!, content: String!): Todo!
     deleteTodo(id: Int!): Todo!
-    editTodo(id: Int!, content: String!): Todo!
+    editTodo(id: Int!, title: String!, content: String!): Todo!
   }
 `;
